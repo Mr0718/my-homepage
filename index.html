@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>张明 · 个人主页</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #181b24;
+    --text: #e8eaf0;
+    --muted: #9aa1b2;
+    --accent: #6c8cff;
+    --accent2: #9d6cff;
+    --radius: 16px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  /* 顶部光晕 */
+  .glow {
+    position: fixed; top: -200px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 500px;
+    background: radial-gradient(closest-side, rgba(108,140,255,.25), transparent);
+    pointer-events: none; z-index: 0;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  nav {
+    position: sticky; top: 0; backdrop-filter: blur(12px);
+    background: rgba(15,17,23,.7); border-bottom: 1px solid rgba(255,255,255,.06);
+    z-index: 10;
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .logo { font-weight: 700; font-size: 18px; }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color .2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  header { padding: 96px 0 72px; text-align: center; }
+  .avatar {
+    width: 108px; height: 108px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 44px; font-weight: 700; color: #fff;
+    margin: 0 auto 24px; box-shadow: 0 8px 32px rgba(108,140,255,.35);
+  }
+  h1 { font-size: 40px; margin-bottom: 8px; }
+  h1 .name-gradient {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .tagline { color: var(--muted); font-size: 18px; margin-bottom: 28px; }
+  .badges { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px; }
+  .badge {
+    background: var(--card); border: 1px solid rgba(255,255,255,.08);
+    padding: 6px 14px; border-radius: 999px; font-size: 13px; color: var(--muted);
+  }
+  .btn {
+    display: inline-block; padding: 12px 28px; border-radius: 12px;
+    text-decoration: none; font-weight: 600; font-size: 15px; margin: 0 8px;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff;
+    box-shadow: 0 6px 24px rgba(108,140,255,.4);
+  }
+  .btn-ghost { border: 1px solid rgba(255,255,255,.15); color: var(--text); }
+
+  section { padding: 48px 0; }
+  h2 { font-size: 26px; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+  h2::before { content: ""; width: 6px; height: 26px; border-radius: 3px; background: linear-gradient(var(--accent), var(--accent2)); }
+
+  .card {
+    background: var(--card); border: 1px solid rgba(255,255,255,.06);
+    border-radius: var(--radius); padding: 24px; margin-bottom: 16px;
+    transition: transform .2s, border-color .2s;
+  }
+  .card:hover { transform: translateY(-3px); border-color: rgba(108,140,255,.4); }
+  .card h3 { font-size: 17px; margin-bottom: 6px; }
+  .card .meta { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
+  .card p { color: var(--muted); font-size: 14px; }
+
+  .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+  .skill {
+    background: var(--card); border: 1px solid rgba(255,255,255,.08);
+    padding: 8px 16px; border-radius: 10px; font-size: 14px;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } .nav-links { display: none; } h1 { font-size: 30px; } }
+
+  footer {
+    margin-top: 48px; padding: 32px 0; text-align: center;
+    color: var(--muted); font-size: 13px; border-top: 1px solid rgba(255,255,255,.06);
+  }
+  .social { display: flex; gap: 18px; justify-content: center; margin-bottom: 12px; }
+  .social a { color: var(--muted); text-decoration: none; font-size: 14px; }
+  .social a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+
+<nav>
+  <div class="container nav-inner">
+    <div class="logo">Zhang<span>.dev</span></div>
+    <div class="nav-links">
+      <a href="#about">关于</a>
+      <a href="#projects">项目</a>
+      <a href="#skills">技能</a>
+      <a href="#contact">联系</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <header>
+    <div class="avatar">明</div>
+    <h1>你好，我是 <span class="name-gradient">张明</span></h1>
+    <p class="tagline">全栈工程师 / 产品爱好者 / 终身学习者</p>
+    <div class="badges">
+      <span class="badge">📍 北京</span>
+      <span class="badge">💼 5 年开发经验</span>
+      <span class="badge">🎯 专注 Web 与效率工具</span>
+    </div>
+    <a class="btn btn-primary" href="#projects">查看我的项目</a>
+    <a class="btn btn-ghost" href="#contact">联系我</a>
+  </header>
+
+  <section id="about">
+    <h2>关于我</h2>
+    <div class="card">
+      <p>我是一名热爱创造的全栈工程师，擅长从 0 到 1 构建产品。工作之余喜欢研究新技术、写技术博客，也喜欢摄影和跑步。相信「工具改变效率，代码改变世界」。</p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>项目经历</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>🚀 TaskFlow · 团队任务管理工具</h3>
+        <div class="meta">React · Node.js · PostgreSQL · 2023</div>
+        <p>面向中小团队的协作工具，支持看板、甘特图与自动化工作流，累计服务 500+ 团队。</p>
+      </div>
+      <div class="card">
+        <h3>📊 DataLens · 数据可视化平台</h3>
+        <div class="meta">Vue 3 · ECharts · Python · 2022</div>
+        <p>拖拽式报表搭建平台，内置 30+ 图表组件，让业务同学 5 分钟产出可视化报告。</p>
+      </div>
+      <div class="card">
+        <h3>📝 NoteMate · AI 笔记助手</h3>
+        <div class="meta">TypeScript · LLM · 2024</div>
+        <p>基于大模型的智能笔记应用，支持自动摘要、知识图谱与语义搜索。</p>
+      </div>
+      <div class="card">
+        <h3>🎨 OpenIcons · 开源图标库</h3>
+        <div class="meta">SVG · GitHub 开源 · 2021</div>
+        <p>2000+ 精致线性图标，GitHub 收获 3.2k Star，被多个开源项目采用。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>技能栈</h2>
+    <div class="skills">
+      <span class="skill">TypeScript</span>
+      <span class="skill">React / Vue</span>
+      <span class="skill">Node.js</span>
+      <span class="skill">Python</span>
+      <span class="skill">PostgreSQL</span>
+      <span class="skill">Docker</span>
+      <span class="skill">AI / LLM 应用</span>
+      <span class="skill">UI 设计</span>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>联系我</h2>
+    <div class="card">
+      <p>欢迎通过以下方式与我交流合作 👇</p>
+    </div>
+    <footer>
+      <div class="social">
+        <a href="mailto:hello@example.com">✉️ 邮箱</a>
+        <a href="https://github.com" target="_blank">💻 GitHub</a>
+        <a href="https://juejin.cn" target="_blank">✍️ 博客</a>
+      </div>
+      <p>© 2025 张明 · 用心做好每一件事</p>
+    </footer>
+  </section>
+</div>
+</body>
+</html>
